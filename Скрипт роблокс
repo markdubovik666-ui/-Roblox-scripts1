@@ -1,0 +1,88 @@
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local UICorner = Instance.new("UICorner")
+local Auto = Instance.new("TextButton")
+local UICorner_2 = Instance.new("UICorner")
+local Label = Instance.new("TextLabel")
+local TextBox = Instance.new("TextBox")
+local UICorner_3 = Instance.new("UICorner")
+local dd = Instance.new("UIDragDetector")
+local on = 0
+
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BackgroundTransparency = 0.200
+Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderSizePixel = 0
+Frame.Position = UDim2.new(0.366485506, 0, 0.363968015, 0)
+Frame.Size = UDim2.new(0, 240, 0, 167)
+
+UICorner.CornerRadius = UDim.new(0, 15)
+UICorner.Parent = Frame
+
+Auto.Name = "Auto"
+Auto.Parent = Frame
+Auto.BackgroundColor3 = Color3.fromRGB(255, 168, 29)
+Auto.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Auto.BorderSizePixel = 0
+Auto.Position = UDim2.new(0.0833333954, 0, 0.461112559, 0)
+Auto.Size = UDim2.new(0, 200, 50)
+Auto.Font = Enum.Font.SourceSans
+Auto.Text = "Start AutoFarm"
+Auto.TextColor3 = Color3.fromRGB(0, 0, 0)
+Auto.TextSize = 30.000
+
+UICorner_2.CornerRadius = UDim.new(0, 15)
+UICorner_2.Parent = Auto
+
+Label.Name = "Label"
+Label.Parent = Frame
+Label.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Label.BackgroundTransparency = 1.000
+Label.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Label.BorderSizePixel = 0
+Label.Position = UDim2.new(0.0833333954, 0, 0.755733669, 0)
+Label.Size = UDim2.new(0, 200, 50)
+Label.Font = Enum.Font.SourceSans
+Label.Text = "NFT Battles V1"
+Label.TextColor3 = Color3.fromRGB(255, 255, 255)
+Label.TextSize = 30.000
+
+TextBox.Parent = Frame
+TextBox.BackgroundColor3 = Color3.fromRGB(255, 115, 0)
+TextBox.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextBox.BorderSizePixel = 0
+TextBox.Position = UDim2.new(0.0818533599, 0, 0.114843674, 0)
+TextBox.Size = UDim2.new(0, 200, 50)
+TextBox.Font = Enum.Font.SourceSans
+TextBox.PlaceholderColor3 = Color3.fromRGB(0, 0, 0)
+TextBox.PlaceholderText = "Enter case name here!"
+TextBox.Text = ""
+TextBox.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextBox.TextSize = 20.000
+
+UICorner_3.CornerRadius = UDim.new(0, 15)
+UICorner_3.Parent = TextBox
+dd.Parent = Frame
+
+Auto.MouseButton1Click:Connect(function()
+  if on == 0 then
+    on = 1
+    Auto.BackgroundColor3 = Color3.fromRGB(4, 132, 15)
+    while on == 1 do
+      local args = {
+        TextBox.Text,
+        10
+      }
+      game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("OpenCase"):InvokeServer(unpack(args))
+      task.wait(2)
+    end
+  else
+    on = 0
+    Auto.BackgroundColor3 = Color3.fromRGB(255, 115, 0)
+  end
+end)
